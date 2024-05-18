@@ -7,7 +7,7 @@ import {
   getAllPackagesService,
   getNumberOfPackagesService
 } from "../services/packageServices";
-import { redis } from "../utils/redis";
+// import { redis } from "../utils/redis";
 import mongoose from "mongoose";
 import path from "path";
 import ejs from "ejs";
@@ -115,24 +115,24 @@ export const getSinglePackage = catchAsyncError(
     try {
       const packageId = req.params.id;
 
-      const isCacheExist = await redis.get(packageId);
+      // const isCacheExist = await redis.get(packageId);
 
-      if (isCacheExist) {
-        const packaged = JSON.parse(isCacheExist);
-        res.status(200).json({
-          success: true,
-          packaged,
-        });
-      } else {
+      // if (isCacheExist) {
+      //   const packaged = JSON.parse(isCacheExist);
+      //   res.status(200).json({
+      //     success: true,
+      //     packaged,
+      //   });
+      // } else {
         const packaged = await PackageModel.findById(req.params.id);
 
-        await redis.set(packageId, JSON.stringify(packaged), "EX", 604800); // 7days
+        // await redis.set(packageId, JSON.stringify(packaged), "EX", 604800); // 7days
 
         res.status(200).json({
           success: true,
           packaged,
         });
-      }
+      // }
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -196,7 +196,7 @@ export const deletePackage = catchAsyncError(
 
       await packaged.deleteOne({ id });
 
-      await redis.del(id);
+      // await redis.del(id);
 
       res.status(200).json({
         success: true,
