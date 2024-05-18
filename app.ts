@@ -17,7 +17,7 @@ app.use(cookieParser());
 //CORS
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://localhost:8000/api/v1/'],
+    origin: ['http://localhost:3000', 'http://localhost:8000/api/v1/', 'http://www.scarbpkg.xyz', 'https://scarbpkg.vercel.app/'],
     credentials: true,
   })
 );
