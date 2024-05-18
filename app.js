@@ -18,10 +18,7 @@ exports.app.use(express_1.default.json({ limit: "50mb" }));
 //cookieParser
 exports.app.use((0, cookie_parser_1.default)());
 //CORS
-exports.app.use((0, cors_1.default)({
-    origin: ['http://localhost:3000', 'http://localhost:8000/api/v1/', 'http://www.scarbpkg.xyz', 'https://scarbpkg.vercel.app/'],
-    credentials: true,
-}));
+exports.app.use((0, cors_1.default)());
 // api requests limit
 const limiter = (0, express_rate_limit_1.rateLimit)({
     windowMs: 15 * 60 * 1000,
